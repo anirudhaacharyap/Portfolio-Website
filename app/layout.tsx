@@ -3,6 +3,7 @@ import { Instrument_Sans, JetBrains_Mono, Space_Mono, Syne } from "next/font/goo
 import "./globals.css";
 import { Navbar } from "@/app/components/Navbar";
 import { Footer } from "@/app/components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -72,7 +73,11 @@ export default function RootLayout({
 
         {/* Status ticker footer */}
         <Footer />
+
+        {/* Vercel Web Analytics */}
+        <Analytics />
       </body>
     </html>
   );
 }
+
