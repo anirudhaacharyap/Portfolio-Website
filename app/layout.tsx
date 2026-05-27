@@ -46,7 +46,12 @@ export const metadata: Metadata = {
     "Full Stack",
     "Next.js",
   ],
+  icons: {
+    icon: "/icon.svg",
+  },
 };
+
+export const dynamic = "force-dynamic";
 
 export default function RootLayout({
   children,
