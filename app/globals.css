@@ -1,26 +1,273 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ──────────────────────────────────────────────
+   DESIGN SYSTEM: Cyber-Terminal Brutalism
+   ────────────────────────────────────────────── */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ── Color Tokens ── */
+  --color-bg-canvas: #0B0B0C;
+  --color-surface: #111112;
+  --color-surface-dim: #141313;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-container: #201f1f;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #353434;
+  --color-surface-bright: #3a3939;
+
+  --color-on-surface: #e5e2e1;
+  --color-on-surface-variant: #c4c7c9;
+  --color-text-silver: #E2E8F0;
+  --color-text-dim: #A1A1AA;
+  --color-terminal-gray: #666666;
+
+  --color-primary: #ffffff;
+  --color-on-primary: #2f3132;
+  --color-primary-fixed: #e2e2e3;
+  --color-primary-fixed-dim: #c6c6c7;
+
+  --color-cyber-green: #00FF66;
+  --color-accent-green: #00FE66;
+  --color-green-dim: #00e55b;
+  --color-green-deep: #007128;
+  --color-green-soft: #6bff83;
+
+  --color-border-muted: #1A1A1C;
+  --color-outline: #8e9193;
+  --color-outline-variant: #444749;
+
+  --color-error-red: #FF0033;
+  --color-warning-amber: #FFD18D;
+
+  /* ── Font Families ── */
+  --font-display: var(--font-syne), "Arial Black", sans-serif;
+  --font-mono-heading: var(--font-jetbrains), "Courier New", monospace;
+  --font-mono-label: var(--font-space-mono), "Courier New", monospace;
+  --font-body: var(--font-instrument), "Segoe UI", sans-serif;
+
+  /* ── Spacing Tokens ── */
+  --spacing-grid-unit: 4px;
+  --spacing-container: 40px;
+  --spacing-item: 16px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ──────────────────────────────────────────────
+   BASE STYLES
+   ────────────────────────────────────────────── */
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+::selection {
+  background-color: #00FE66;
+  color: #002107;
+}
+
+html {
+  background-color: #0B0B0C;
+  color: #e5e2e1;
+  scroll-behavior: smooth;
+  scroll-padding-top: 64px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0B0B0C;
+  color: #e5e2e1;
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ──────────────────────────────────────────────
+   SCROLL SECTIONS
+   ────────────────────────────────────────────── */
+
+/* Hero section — full viewport */
+.scroll-section-hero {
+  min-height: calc(100vh - 64px - 40px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content sections — generous vertical padding for breathing room */
+.scroll-section {
+  padding-top: 6rem;   /* 96px */
+  padding-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Flowing section for long content (Work) — no fixed height */
+.scroll-section-flow {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subtle separator between sections */
+.scroll-section-hero + .scroll-section,
+.scroll-section + .scroll-section,
+.scroll-section + .scroll-section-flow,
+.scroll-section-flow + .scroll-section {
+  border-top: 0.5px solid #1A1A1C;
+}
+
+@media (min-width: 768px) {
+  .scroll-section,
+  .scroll-section-flow {
+    padding-top: 8rem;   /* 128px */
+    padding-bottom: 8rem;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   GRAIN / NOISE OVERLAY
+   ────────────────────────────────────────────── */
+
+.grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ──────────────────────────────────────────────
+   GRID BACKGROUND
+   ────────────────────────────────────────────── */
+
+.grid-bg {
+  background-size: 24px 24px;
+  background-image: radial-gradient(rgba(0, 255, 102, 0.04) 1px, transparent 1px);
+}
+
+/* ──────────────────────────────────────────────
+   HAIRLINE BORDERS
+   ────────────────────────────────────────────── */
+
+.hairline-border {
+  border-width: 0.5px;
+  border-color: #1A1A1C;
+}
+
+.hairline-border-b {
+  border-bottom-width: 0.5px;
+  border-bottom-color: #1A1A1C;
+}
+
+.hairline-border-r {
+  border-right-width: 0.5px;
+  border-right-color: #1A1A1C;
+}
+
+.hairline-border-t {
+  border-top-width: 0.5px;
+  border-top-color: #1A1A1C;
+}
+
+/* ──────────────────────────────────────────────
+   TEXT VERTICAL
+   ────────────────────────────────────────────── */
+
+.text-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+/* ──────────────────────────────────────────────
+   ANIMATIONS
+   ────────────────────────────────────────────── */
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.pulse-green {
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* ──────────────────────────────────────────────
+   CARD INTERACTIONS
+   ────────────────────────────────────────────── */
+
+.card-perspective {
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1),
+              opacity 0.6s cubic-bezier(0.2, 0, 0.2, 1),
+              box-shadow 0.6s cubic-bezier(0.2, 0, 0.2, 1),
+              border-color 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.card-container:hover .card-perspective:not(:hover) {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.card-perspective:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: #00FF66 !important;
+  z-index: 20 !important;
+}
+
+/* ──────────────────────────────────────────────
+   TAG EXPAND HOVER
+   ────────────────────────────────────────────── */
+
+.tag-expand {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  white-space: nowrap;
+}
+
+.tag-trigger:hover .tag-expand {
+  width: 90px;
+}
+
+/* ──────────────────────────────────────────────
+   SCROLLBAR
+   ────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0B0C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1A1A1C;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2a2a;
 }

@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ANI // BACKEND_ENGINEER & RESEARCHER // PORTFOLIO
 
-## Getting Started
+A high-performance, brutalist-styled terminal portfolio website engineered with Next.js, Framer Motion, and Resend. Designed with pixel-perfect monospace spacing, dynamic telemetry process grids, and secure asynchronous mail-routing server actions.
 
-First, run the development server:
+---
 
+## ⚡ TECH STACK & CONFIGURATION
+
+- **Framework**: [Next.js 16.2](https://nextjs.org/) (App Router & Strict Types)
+- **Styling**: Modern Tailwind CSS v4 & Brutalist Terminal Variables
+- **Animations**: [Framer Motion 12](https://www.framer.com/motion/) (Cinematic Scroll Triggering)
+- **Email Routing**: Asynchronous Next.js Server Actions (`"use server"`) driven by the [Resend SDK](https://resend.com)
+- **Icons**: [Lucide React](https://lucide.dev/) (Brutalist monospace-friendly suite)
+
+---
+
+## 💻 CORE ARCHITECTURE DETAILS
+
+### 1. Live System Monitor Grid (`SYSTEM_MONITOR`)
+- A real-time process monitoring widget above the fold. 
+- Simulates background worker threads synchronizing local ML Pipelines and caching nodes. 
+- Integrated with smooth anchor scrolls directing recruiters straight to project details when individual PIDs or process names are clicked.
+
+### 2. High-Fidelity Framer Motion Scroll Pipeline
+- Globally triggered scroll reveals using `whileInView` with standard viewport margins and professional custom cubic-bezier transitions (`ease: [0.25, 0.1, 0.25, 1]`).
+- Custom staggering variants applied across experience records (`staggerChildren: 0.1`) and downstream metric tags (`staggerChildren: 0.06`), ensuring zero bouncy overshoots or layout displacements.
+
+### 3. About Me Terminal shell (`recruiter_dossier.sh`)
+- A custom, fully interactive terminal emulator handling real-time shell instructions (`help`, `skills`, `specs`, `neofetch`, `clear`).
+- **Inner-Scroll Bound**: Fitted with local container-scoped `.scrollTo()` boundaries to prevent global page shifts during active execution.
+
+### 4. Secure Backend Mail Delivery
+- High-security contact form utilizing server-side environment variables (`RESEND_API_KEY`) to prevent client-side key leakage.
+- Features brutalist error banners, automatic submit loaders (`[SENDING...]`), and active status updates (`TRANSMITTING...`) to fully verify transmission states.
+
+---
+
+## 🛠️ RUNNING LOCAL DIAGNOSTICS
+
+### Development Server
+Run the local dev engine with hot-reloading enabled:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Strict Type Validation & Production Build
+Compile the application and verify type check integrity:
+```bash
+npm run build
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 SECURE DEPLOYMENT PROTOCOL (VERCEL)
 
-## Learn More
+### 1. Git Push (Secrets Ignored)
+All `.env` credentials, virtual debug caches, and local configurations are securely defined within the project `.gitignore` and will never be pushed to version control:
+```env
+# Ignored env file definition
+.env*
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 2. Environmental Setup on Vercel
+To go live on Vercel:
+1. Import this repository into Vercel.
+2. Go to **Settings > Environment Variables**.
+3. Add your secure Resend API Key:
+   - **Key**: `RESEND_API_KEY`
+   - **Value**: `re_YourResendApiKeyHere`
+4. Click **Deploy**. Vercel will automatically parse `nextConfig` and launch your secure server actions instantly.
